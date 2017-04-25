@@ -1,0 +1,40 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>song Title</th>
+      <th>Times Used</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |s| %>
+    <tr><td><%= s.artist %></td>
+      <td><%= link_to s.title, song_show_path(song_id: s.id) %></td>
+      <td><%= s.playlists.count %></td>
+      <td>
+        <form method="POST">
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <button class='btn btn-primary' formaction="/playlist/<%= current_user.id %>/<%= s.id %>">Add</button>
+        </form>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id='addSong'>
+  <form method="POST" action='/song'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <div class='row form-group'>
+      <label class='col-md-2'>Song Title:</label><input class='col-md-5' type='text' name="song[title]" value="<%= @song.title %>"/>
+    </div>
+    <div class='row form-group'>
+      <label class='col-md-2'>Artist:</label><input class='col-md-5' type='text' name="song[artist]" value="<%= @song.artist %>"/>
+    </div>
+    <button class='btn btn-primary col-md-offset-2' type='submit'>Add New Song</button>
+  </form>
+</div>
+<% content_for :footer do %>
+<sub>Song#index</sub>
+<sub>Find me in app/views/song/index.html.erb</sub>
+<% end %>

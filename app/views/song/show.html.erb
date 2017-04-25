@@ -1,0 +1,21 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Times Used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+    <tr>
+      <td><%= link_to u.name, user_show_path(id: u.id) %></td>
+      <td><%= u.songs.where(id: @song.id).count %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :footer do %>
+<sub>Song#show</sub>
+<sub>Find me in app/views/song/show.html.erb</sub>
+<% end %>

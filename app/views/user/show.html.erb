@@ -1,0 +1,24 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Times Added</th>
+      <!-- <th>Actions</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @UserPlaylist.each do |s| %>
+    <tr>
+      <td><%= s.artist %></td>
+      <td><%= s.title %></td>
+      <td><%= s.playlists.where(user:@user).count %></td>
+      <!-- <td>buttons go here</td> -->
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% content_for :footer do %>
+<sub>User#show</sub>
+<sub>Find me in app/views/user/show.html.erb</sub>
+<% end %>
